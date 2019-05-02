@@ -1,0 +1,71 @@
+---
+message: "This node is using common data"
+
+# These options manage default merge behavior. Can be overridden via hierarchy
+# https://puppet.com/docs/puppet/latest/hiera_merging.html#setting-the-merge-behavior-for-a-lookup
+lookup_options:
+  profile::interfaces::interfaces:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+  profile::ntp_server::servers:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+
+# Purge unmanaged resources by default
+profile::ntp_server::purge: true
+profile::syslog_server::purge: true
+
+# Default MOTD
+profile::banner::motd: "Managed by Puppet - common.yaml\n"
+
+# Default NTP Servers
+profile::ntp_server::servers:
+  132.163.96.5:
+    prefer: true
+    ensure: present
+  132.163.97.5:
+    prefer: false
+    ensure: present
+
+# Default Syslog Servers
+profile::syslog_server::servers:
+  192.168.11.1:
+    ensure: present
+  192.168.22.2:
+    ensure: present
+
+profile::vxlan::ospf:
+  instance: '10'
+  area: '0.0.0.0'
+  interconnect: Ethernet1/1
+
+profile::vxlan::vxlan:
+  access_vlan: '1000'
+  vni: '5000'
+  nve: nve1
+  lo: 'loopback0'
+
+profile::interfaces::interfaces:
+  loopback0:
+    description: 'Managed By Puppet'
+    shutdown: false
+    switchport_mode: disabled
+    ipv4_pim_sparse_mode: true
+  loopback1:
+    description: 'Managed By Puppet'
+    shutdown: false
+    switchport_mode: disabled
+    ipv4_address: '3.3.3.3'
+    ipv4_netmask_length: 32
+    ipv4_pim_sparse_mode: true
+  Ethernet1/1:
+    description: 'Managed By Puppet'
+    shutdown: false
+    switchport_mode: disabled
+    ipv4_pim_sparse_mode: true
+  Ethernet1/2:
+    shutdown: false
+    switchport_mode: access
+    access_vlan: '1000'

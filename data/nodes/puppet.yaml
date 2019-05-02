@@ -1,0 +1,25 @@
+---
+device_manager::devices::defaults:
+  include_module:         false
+device_manager::devices:
+  ios-1:
+    type:                 'cisco_ios'
+    credentials:
+      address:           '192.168.122.70'
+      username:          'admin'
+      password:          'admin'
+      enable_password:   'admin'
+  nexus-1:
+    type:                'cisco_nexus'
+    credentials:
+      address:           '192.168.122.50'
+      username:          'admin'
+      password:          'admin'
+      transport:         'http'
+  nexus-2:
+    type:                'cisco_nexus'
+    credentials:
+      address:           '192.168.122.60'
+      username:          'admin'
+      password:          'admin'
+      transport:         'http'

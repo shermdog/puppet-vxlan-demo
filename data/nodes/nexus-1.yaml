@@ -1,0 +1,10 @@
+---
+profile::interfaces::interfaces:
+  loopback0:
+    ipv4_address: '1.1.1.1'
+    ipv4_netmask_length: 32
+  Ethernet1/1:
+    ipv4_address: '10.10.10.1'
+    ipv4_netmask_length: 30
+  Ethernet1/2:
+    description: 'Host1'
